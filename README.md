@@ -1,4 +1,4 @@
-#Applicazione Terzo Occhio
+# Applicazione Terzo Occhio
 
 Applicazione che permette di visitare i luoghi di interesse storico-culturale di Cuneo (punti di interesse: http://www.ilterzocchio.it/). Questa visita viene fatta sottoforma di gioco, in cui bisogna cercare i punti su una mappa generata appositamente. L'obiettivo è fare conoscere la storia di Cuneo attraverso il gioco (utilizzando l'idea della gamification).
 
@@ -7,9 +7,9 @@ Java - Sviluppo dell'applicazione (IDE utilizzato: Android Studio)
 Python - Sviluppo del server
 
 
-##Autori
+## Autori
 
-Bottasso Davide - https://github.com/DavideBottasso
-Damiano Matteo - https://github.com/MatteoDamiano
-Dutto Matteo - https://github.com/MatteoDutto
+Bottasso Davide - https://github.com/DavideBottasso <br>
+Damiano Matteo - https://github.com/MatteoDamiano <br>
+Dutto Matteo - https://github.com/MatteoDutto <br>
 
