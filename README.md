@@ -9,7 +9,7 @@ Python - Sviluppo del server
 
 ## Autori
 
-Bottasso Davide - https://github.com/DavideBottasso <br>
-Damiano Matteo - https://github.com/MatteoDamiano <br>
-Dutto Matteo - https://github.com/MatteoDutto <br>
+* <b>Davide Bottasso</b> - <i>Android</i> - <a href="https://github.com/DavideBottasso">DavideBottasso</a>
+* <b>Matteo Damiano</b> - <i>Mappa</i> - <a href="https://github.com/MatteoDamiano">MatteoDamiano</a>
+* <b>Matteo Dutto</b> - <i>Mente</i> - <a href="https://github.com/MatteoDutto">MatteoDutto</a>
 
