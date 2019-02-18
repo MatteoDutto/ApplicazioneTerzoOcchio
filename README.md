@@ -1,4 +1,3 @@
 # ProgettoTesina
-Progetto tesina
 
-TROVARE DELLE IDEE
+Applicazione che permette di seguire percosi di tipo storico-culturale attraverso le
