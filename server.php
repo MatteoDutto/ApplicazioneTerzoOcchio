@@ -61,7 +61,7 @@
 			$stmt->execute();
 			$result = $stmt->fetchAll();
 			
-			$return = 'PAGINA=' . $result[0][0] . ';' . $result[0][1] . ';' . $result[0][2] . ';' . $result[0][3] . '__';
+			$return = 'PAGINA=' . $result[0][0] . '-' . $result[0][1] . '-' . $result[0][2] . '-' . $result[0][3] . '__';
 
 		}elseif ($type == 'register'){
 			/*
@@ -74,8 +74,9 @@
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		
-
+		}
 		echo $return;
+		
 		
 	}	catch(PDOException $e){
 		echo "Connection failed: " . $e->getMessage() . "<br>";
