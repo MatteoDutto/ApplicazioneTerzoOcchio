@@ -9,7 +9,12 @@
 		$return = '';
 
 		if($type == 'login'){
-
+			/*
+			REQUEST:
+			TYPE=login&MAIL=<mail>
+			ANSWER:
+			
+			*/
 			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -22,6 +27,12 @@
 			$return = 'PSW=' . $result[0];
 
 		} elseif ($type == 'coordinate'){
+			/*
+			REQUEST:
+			TYPE=coordinate
+			ANSWER:
+			
+			*/
 			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -35,6 +46,12 @@
 			}
 
 		} elseif ($type == 'qrcode'){
+			/*
+			REQUEST:
+			TYPE=qrcode&PAGINA=<nPagina>
+			ANSWER:
+			
+			*/
 			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -44,9 +61,19 @@
 			$stmt->execute();
 			$result = $stmt->fetchAll();
 			
-			$return = 'PAGINA=' . $result[0][0] . ',' . $result[0][1] . ',' . $result[0][2] . ',' . $result[0][3] . ';';
+			$return = 'PAGINA=' . $result[0][0] . ';' . $result[0][1] . ';' . $result[0][2] . ';' . $result[0][3] . '__';
 
-		}
+		}elseif ($type == 'register'){
+			/*
+			REQUEST:
+			TYPE=register&ID=&NOME=&COGNOME=&DATANASCITA=&EMAIL=&PASSWORD
+			ANSWER:
+			
+			*/
+			$conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		
 
 		echo $return;
 		
