@@ -151,8 +151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-                    //Toast.makeText(getApplicationContext(), R.string.barcode_success, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), barcode.displayValue, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), barcode.displayValue, Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Barcode read: " + barcode.displayValue);
                     Intent i = new Intent(this, ActivityPagina.class);
                     i.putExtra("pagina", barcode.displayValue);
