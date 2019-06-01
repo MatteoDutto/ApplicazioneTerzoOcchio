@@ -17,7 +17,7 @@ android {
     }
 }
 
-repositories{
+repositories {
     mavenCentral()
 }
 
@@ -33,4 +33,5 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27+'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:7.4.0'
+    implementation project(path: ':server-client_communication')
 }

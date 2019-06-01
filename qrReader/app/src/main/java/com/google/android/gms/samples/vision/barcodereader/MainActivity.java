@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.samples.vision.barcodereader.ui.camera.ActivityPagina;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -153,6 +154,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     //Toast.makeText(getApplicationContext(), R.string.barcode_success, Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), barcode.displayValue, Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Barcode read: " + barcode.displayValue);
+                    Intent i = new Intent(this, ActivityPagina.class);
+                    i.putExtra("pagina", barcode.displayValue);
+                    startActivity(i);
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.barcode_failure, Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "No barcode captured, intent data is null");
