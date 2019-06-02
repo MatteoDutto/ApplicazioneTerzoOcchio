@@ -3,6 +3,8 @@ package com.google.android.gms.samples.vision.barcodereader.ui.camera;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 import com.example.server_client_communication.Luogo;
@@ -22,6 +24,11 @@ public class ActivityPagina extends AppCompatActivity {
         TextView lblPeriodo = findViewById(R.id.lblPeriodo);
         TextView lblTesto = findViewById(R.id.lblTesto);
 
+        //abilita lo sroll sul testo
+        lblTesto.setMovementMethod(new ScrollingMovementMethod());
+
+
+
         Intent i = getIntent();
         String pagina = i.getStringExtra("pagina");
         String n_pagina = pagina.substring(47);
@@ -36,7 +43,8 @@ public class ActivityPagina extends AppCompatActivity {
 
         lblNomeLuogo.setText(luogo.getNome());
         lblPeriodo.setText(luogo.getPeriodo());
-        lblTesto.setText(luogo.getTesto());
+        //Usando Html.fromHtml interpreta il testo come html visualizzando i rispettivi a capo ecc
+        lblTesto.setText(Html.fromHtml(luogo.getTesto()));
 
     }
 }

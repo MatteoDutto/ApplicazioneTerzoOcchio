@@ -6,8 +6,8 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/register"
-            android:icon="@drawable/common_google_signin_btn_icon_light"
-            android:title="Register" />
+            android:icon="@drawable/ic_account"
+            android:title="Login / Registrati" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
