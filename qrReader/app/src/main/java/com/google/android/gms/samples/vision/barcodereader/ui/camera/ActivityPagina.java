@@ -41,10 +41,20 @@ public class ActivityPagina extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //Per togiere il ";" dalla fine del testo
+        String luogoTesto = "  ";
+        String tmp = luogo.getTesto();
+        int lon = tmp.length();
+        //prende i caratteri da quello iniziale al finale -1. Quello escluso è il nostro ";"
+        if(lon != 0){
+            luogoTesto= tmp.substring(0,lon-1);
+        }
+
+
         lblNomeLuogo.setText(luogo.getNome());
         lblPeriodo.setText(luogo.getPeriodo());
-        //Usando Html.fromHtml interpreta il testo come html visualizzando i rispettivi a capo ecc
-        lblTesto.setText(Html.fromHtml(luogo.getTesto()));
+        //Usando Html.fromHtml interpreta il testo come html visualizzando i rispettivi tag html testualmente
+        lblTesto.setText(Html.fromHtml(luogoTesto));
 
     }
 }

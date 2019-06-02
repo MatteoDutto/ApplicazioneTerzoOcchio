@@ -2,6 +2,8 @@ package com.google.android.gms.samples.vision.barcodereader;
 
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -17,14 +19,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.server_client_communication.TerzoOcchio_Server;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.samples.vision.barcodereader.ui.camera.ActivityPagina;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,7 +62,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/3occhi/cjui32etx00un1fmc97ny7ah1"), new Style.OnStyleLoaded() {
                     @Override
-                    public void onStyleLoaded(@NonNull Style style) {}
+                    public void onStyleLoaded(@NonNull Style style) {
+                                // Add the marker image to map
+                                style.addImage("marker-icon-id",
+                                        BitmapFactory.decodeResource(
+                                                MainActivity.this.getResources(), R.drawable.mapbox_marker_icon_default));
+
+                        GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", Feature.fromGeometry(
+                                Point.fromLngLat(7.54761, 44.3899 	)));
+                        style.addSource(geoJsonSource);
+
+                        SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
+                        symbolLayer.withProperties(
+                                PropertyFactory.iconImage("marker-icon-id")
+                        );
+                        style.addLayer(symbolLayer);
+                    }
                 });
 
 
@@ -169,4 +195,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         mapView.onStart();
     }
+
 }
