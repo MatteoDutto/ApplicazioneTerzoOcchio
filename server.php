@@ -61,7 +61,7 @@
 			$stmt->execute();
 			$result = $stmt->fetchAll();
 			
-			$return = 'PAGINA=' . $result[0][0] . '-' . $result[0][1] . '-' . $result[0][2] . '-' . $result[0][3] . '__';
+			$return = 'PAGINA=' . $result[0][0] . '__' . $result[0][1] . '__' . $result[0][2] . '__' . $result[0][3] . '___';
 
 		}elseif ($type == 'register'){
 			/*
