@@ -19,11 +19,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.server_client_communication.Locazione;
 import com.example.server_client_communication.TerzoOcchio_Server;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.samples.vision.barcodereader.ui.camera.ActivityPagina;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -36,6 +38,7 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setContentView(R.layout.activity_main1);
 
-
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
@@ -59,28 +61,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
+                TerzoOcchio_Server server = new TerzoOcchio_Server();
+                ArrayList<Locazione> loc = null;
 
-                mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/3occhi/cjui32etx00un1fmc97ny7ah1"), new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
+
+                try {
+                    loc = server.location();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+
+                List<Feature> symbolLayer = new ArrayList<>();
+                for(Locazione locazione : loc){
+                    symbolLayer.add(Feature.fromGeometry(Point.fromLngLat(locazione.getLongitudine(), locazione.getLatitudine())));
+                }
+
+
+                mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/3occhi/cjui32etx00un1fmc97ny7ah1")
+                        .withImage("marker-icon-id", BitmapFactory.decodeResource(MainActivity.this.getResources(), R.drawable.mapbox_marker_icon_default))
+                        .withSource(new GeoJsonSource("source-id", FeatureCollection.fromFeatures(symbolLayer)))
+                        .withLayer(new SymbolLayer("layer-id", "source-id")
+                            .withProperties(PropertyFactory.iconImage("marker-icon-id")))
+                        , new Style.OnStyleLoaded() {
+                            @Override
+                            public void onStyleLoaded(@NonNull Style style) {
                                 // Add the marker image to map
-                                style.addImage("marker-icon-id",
-                                        BitmapFactory.decodeResource(
-                                                MainActivity.this.getResources(), R.drawable.mapbox_marker_icon_default));
+                                /*TerzoOcchio_Server server = new TerzoOcchio_Server();
+                                ArrayList<Locazione> loc = null;
 
-                        GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", Feature.fromGeometry(
-                                Point.fromLngLat(7.54761, 44.3899 	)));
-                        style.addSource(geoJsonSource);
+                                try {
+                                    loc = server.location();
+                                } catch (MalformedURLException e) {
+                                    e.printStackTrace();
+                                }
 
-                        SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
-                        symbolLayer.withProperties(
-                                PropertyFactory.iconImage("marker-icon-id")
-                        );
-                        style.addLayer(symbolLayer);
-                    }
+                                /*ciclo che scorre un arraylist contenente latitudini, longitudini di tutti i punti
+                                 * da inserire sulla mappa che assegna ad un nuovo marker che apparirà sulla mappa
+                                for (Locazione location : loc) {
+
+                                    // Add the marker image to map
+                                    style.addImage("marker-icon-id",
+                                            BitmapFactory.decodeResource(
+                                                    MainActivity.this.getResources(), R.drawable.mapbox_marker_icon_default));
+
+                                    GeoJsonSource geoJsonSource = new GeoJsonSource("source-id-" + location.getId(),
+                                            Feature.fromGeometry(Point.fromLngLat(location.getLongitudine(), location.getLatitudine())));
+                                    style.addSource(geoJsonSource);
+
+                                    SymbolLayer symbolLayer = new SymbolLayer("layer-id-" + location.getId(), "source-id" +
+                                            location.getId());
+                                    symbolLayer.withProperties(
+                                            PropertyFactory.iconImage("marker-icon-id")
+                                    );
+                                    style.addLayer(symbolLayer);
+                                }
+                            */}
                 });
-
-
             }
         });
 
@@ -195,5 +231,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         mapView.onStart();
     }
+
+    public void generateMapMarker(Style style) {
+        TerzoOcchio_Server server = new TerzoOcchio_Server();
+        ArrayList<Locazione> loc = null;
+
+        try {
+            loc = server.location();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        /*ciclo che scorre un arraylist contenente latitudini, longitudini di tutti i punti
+         * da inserire sulla mappa che assegna ad un nuovo marker che apparirà sulla mappa*/
+        for (Locazione location : loc) {
+
+            // Add the marker image to map
+            style.addImage("marker-icon-id",
+                    BitmapFactory.decodeResource(
+                            MainActivity.this.getResources(), R.drawable.mapbox_marker_icon_default));
+
+            GeoJsonSource geoJsonSource = new GeoJsonSource("source-id-" + location.getId(), Feature.fromGeometry(
+                    Point.fromLngLat(location.getLongitudine(), location.getLatitudine())));
+            style.addSource(geoJsonSource);
+
+            SymbolLayer symbolLayer = new SymbolLayer("layer-id" + location.getId(), "source-id");
+            symbolLayer.withProperties(
+                    PropertyFactory.iconImage("marker-icon-id")
+            );
+            style.addLayer(symbolLayer);
+        }
+    }
+
+
+                                    /*style.addImage("marker-icon-id",
+                                        BitmapFactory.decodeResource(
+                                                MainActivity.this.getResources(), R.drawable.mapbox_marker_icon_default));
+
+                        GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", Feature.fromGeometry(
+                                Point.fromLngLat(7.54761, 44.3899 	)));
+                        style.addSource(geoJsonSource);
+
+                        SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
+                        symbolLayer.withProperties(
+                                PropertyFactory.iconImage("marker-icon-id")
+                        );
+                        style.addLayer(symbolLayer);*/
 
 }
