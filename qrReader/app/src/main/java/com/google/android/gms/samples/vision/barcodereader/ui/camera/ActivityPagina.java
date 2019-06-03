@@ -24,10 +24,8 @@ public class ActivityPagina extends AppCompatActivity {
         TextView lblPeriodo = findViewById(R.id.lblPeriodo);
         TextView lblTesto = findViewById(R.id.lblTesto);
 
-        //abilita lo sroll sul testo
+        //Abilita lo sroll sul testo
         lblTesto.setMovementMethod(new ScrollingMovementMethod());
-
-
 
         Intent i = getIntent();
         String pagina = i.getStringExtra("pagina");
@@ -42,19 +40,16 @@ public class ActivityPagina extends AppCompatActivity {
         }
 
         //Per togiere il ";" dalla fine del testo
-        String luogoTesto = "  ";
         String tmp = luogo.getTesto();
         int lon = tmp.length();
         //prende i caratteri da quello iniziale al finale -1. Quello escluso è il nostro ";"
-        if(lon != 0){
-            luogoTesto= tmp.substring(0,lon-1);
-        }
+        String luogoTesto = tmp.substring(0,lon-1);
 
 
         lblNomeLuogo.setText(luogo.getNome());
         lblPeriodo.setText(luogo.getPeriodo());
-        //Usando Html.fromHtml interpreta il testo come html visualizzando i rispettivi tag html testualmente
-        lblTesto.setText(Html.fromHtml(luogoTesto));
-
+        //Usando Html.fromHtml interpreta il testo come html visualizzando i rispettivi tag html testualmente.
+        //I \n sono una soluzione temporanea per la visualizzazione.
+        lblTesto.setText(Html.fromHtml(luogoTesto) + "\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 }

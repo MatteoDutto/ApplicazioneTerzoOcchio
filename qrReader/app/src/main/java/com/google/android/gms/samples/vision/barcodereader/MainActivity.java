@@ -3,7 +3,6 @@ package com.google.android.gms.samples.vision.barcodereader;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -41,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = "BarcodeMain";
@@ -84,38 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             .withProperties(PropertyFactory.iconImage("marker-icon-id")))
                         , new Style.OnStyleLoaded() {
                             @Override
-                            public void onStyleLoaded(@NonNull Style style) {
-                                // Add the marker image to map
-                                /*TerzoOcchio_Server server = new TerzoOcchio_Server();
-                                ArrayList<Locazione> loc = null;
-
-                                try {
-                                    loc = server.location();
-                                } catch (MalformedURLException e) {
-                                    e.printStackTrace();
-                                }
-
-                                /*ciclo che scorre un arraylist contenente latitudini, longitudini di tutti i punti
-                                 * da inserire sulla mappa che assegna ad un nuovo marker che apparirà sulla mappa
-                                for (Locazione location : loc) {
-
-                                    // Add the marker image to map
-                                    style.addImage("marker-icon-id",
-                                            BitmapFactory.decodeResource(
-                                                    MainActivity.this.getResources(), R.drawable.mapbox_marker_icon_default));
-
-                                    GeoJsonSource geoJsonSource = new GeoJsonSource("source-id-" + location.getId(),
-                                            Feature.fromGeometry(Point.fromLngLat(location.getLongitudine(), location.getLatitudine())));
-                                    style.addSource(geoJsonSource);
-
-                                    SymbolLayer symbolLayer = new SymbolLayer("layer-id-" + location.getId(), "source-id" +
-                                            location.getId());
-                                    symbolLayer.withProperties(
-                                            PropertyFactory.iconImage("marker-icon-id")
-                                    );
-                                    style.addLayer(symbolLayer);
-                                }
-                            */}
+                            public void onStyleLoaded(@NonNull Style style) {}
                 });
             }
         });
@@ -130,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
 
-                //Toast.makeText(getApplicationContext(), "Prova", Toast.LENGTH_SHORT).show();
                 //codice che fa aprire la scansione del qr
 
                 Intent intent = new Intent(MainActivity.this, BarcodeCaptureActivity.class);
@@ -149,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -184,17 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.register) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            //Codice che gestisce la registrazione
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -262,20 +221,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             style.addLayer(symbolLayer);
         }
     }
-
-
-                                    /*style.addImage("marker-icon-id",
-                                        BitmapFactory.decodeResource(
-                                                MainActivity.this.getResources(), R.drawable.mapbox_marker_icon_default));
-
-                        GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", Feature.fromGeometry(
-                                Point.fromLngLat(7.54761, 44.3899 	)));
-                        style.addSource(geoJsonSource);
-
-                        SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
-                        symbolLayer.withProperties(
-                                PropertyFactory.iconImage("marker-icon-id")
-                        );
-                        style.addLayer(symbolLayer);*/
-
 }
