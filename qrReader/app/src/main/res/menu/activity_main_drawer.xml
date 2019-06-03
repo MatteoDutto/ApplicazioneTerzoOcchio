@@ -8,7 +8,8 @@
             android:id="@+id/register"
             android:icon="@drawable/ic_account"
             android:title="Login / Registrati" />
-        <item
+    </group>
+        <!--<item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Gallery" />
@@ -33,6 +34,5 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="Send" />
         </menu>
-    </item>
-
+    </item>-->
 </menu>

@@ -11,7 +11,7 @@
     <string name="barcode_success">Codice QR letto correttamente</string>
     <string name="barcode_failure">Nessun codice QR catturato</string>
     <string name="barcode_error">"Errore durante la lettura: %1$s"</string>
-    <string name="app_name">BottApp</string>
+    <string name="app_name">TerzOcchio</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Davide Bottasso</string>

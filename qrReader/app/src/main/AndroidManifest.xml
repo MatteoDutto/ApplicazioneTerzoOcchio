@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.google.android.gms.samples.vision.barcodereader"
+    package="com.google.android.gms.samples.vision.terzocchio"
     android:installLocation="auto">
 
     <uses-feature android:name="android.hardware.camera" />
@@ -16,10 +16,10 @@
         android:fullBackupContent="false"
         android:hardwareAccelerated="true"
         android:icon="@drawable/icon"
-        android:label="MultiTrackerApp"
+        android:label="TerzOcchio"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
-        <activity android:name=".ui.camera.ActivityPagina"></activity>
+        <activity android:name="com.bot.terzocchio.ui.camera.ActivityPagina"></activity>
         <!--
         <meta-data
             android:name="com.google.android.gms.version"
@@ -29,7 +29,7 @@
             android:value="barcode" />!
         -->
         <activity
-            android:name=".MainActivity"
+            android:name="com.bot.terzocchio.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BarcodeCaptureActivity"
+            android:name="com.bot.terzocchio.BarcodeCaptureActivity"
             android:label="Read Barcode" />
     </application>
 

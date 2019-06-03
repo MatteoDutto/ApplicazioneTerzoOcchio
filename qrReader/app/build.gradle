@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        applicationId "com.google.android.gms.samples.vision.barcodereader"
+        applicationId "com.bot.terzocchio"
         minSdkVersion 14
         versionCode 1
         versionName "1.0"
