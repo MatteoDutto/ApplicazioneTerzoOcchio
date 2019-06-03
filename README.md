@@ -11,5 +11,5 @@ Applicazione che permette di visitare i luoghi di interesse storico-culturale di
 
 * <b>Davide Bottasso</b> - <i>Android</i> - <a href="https://github.com/DavideBottasso">DavideBottasso</a>
 * <b>Matteo Damiano</b> - <i>Mappa</i> - <a href="https://github.com/MatteoDamiano">MatteoDamiano</a>
-* <b>Matteo Dutto</b> - <i>Mente</i> - <a href="https://github.com/MatteoDutto">MatteoDutto</a>
+* <b>Matteo Dutto</b> - <i>Server</i> - <a href="https://github.com/MatteoDutto">MatteoDutto</a>
 
