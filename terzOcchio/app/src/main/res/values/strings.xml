@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Richiesto l\'accesso alla fotocamera per la lettura del QR Code</string>
+    <string name="no_camera_permission">L\'applicazione non può funzionare perchè non ha i permessi per accedere alla fotocamera. L\'applicazione verrà chiusa.</string>
+    <string name="low_storage_error">Le dipendenze "Face detector" non possono essere scaricate per mancanza di spazio sul dispositivo</string>
+    <string name="title_activity_main">QR Code Reader</string>
+    <string name="read_barcode">Leggi codice</string>
+    <string name="auto_focus">Auto Focus</string>
+    <string name="use_flash">Usa Flash</string>
+    <string name="barcode_success">Codice QR letto correttamente</string>
+    <string name="barcode_failure">Nessun codice QR catturato</string>
+    <string name="barcode_error">"Errore durante la lettura: %1$s"</string>
+    <string name="app_name">TerzOcchio</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Davide Bottasso</string>
+    <string name="nav_header_subtitle">davide.bottasso@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Impostazioni</string>
+</resources>
