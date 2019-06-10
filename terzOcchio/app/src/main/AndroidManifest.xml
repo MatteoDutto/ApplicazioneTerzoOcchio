@@ -18,7 +18,8 @@
         android:icon="@drawable/icon"
         android:label="TerzOcchio"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat">
+        android:theme="@style/Theme.AppCompat"
+        android:fitsSystemWindows="true">
         <activity android:name=".ui.camera.ActivityPagina"></activity>
         <!--
         <meta-data

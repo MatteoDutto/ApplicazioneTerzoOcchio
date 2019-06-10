@@ -36,29 +36,11 @@ import java.util.Vector;
  * idea is that detection items are expressed in terms of a preview size, but need to be scaled up
  * to the full view size, and also mirrored in the case of the front-facing camera.<p>
  *
- * Associated {@link Graphic} items should use the following methods to convert to view coordinates
- * for the graphics that are drawn:
- * <ol>
- * <li>{@link Graphic#scaleX(float)} and {@link Graphic#scaleY(float)} adjust the size of the
- * supplied value from the preview scale to the view scale.</li>
- * <li>{@link Graphic#translateX(float)} and {@link Graphic#translateY(float)} adjust the coordinate
- * from the preview's coordinate system to the view coordinate system.</li>
- * </ol>
  */
 public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
     private final Object mLock = new Object();
-    private int mPreviewWidth;
-    private float mWidthScaleFactor = 1.0f;
-    private int mPreviewHeight;
-    private float mHeightScaleFactor = 1.0f;
-    private int mFacing = CameraSource.CAMERA_FACING_BACK;
     private Set<T> mGraphics = new HashSet<>();
 
-    /**
-     * Base class for a custom graphics object to be rendered within the graphic overlay.  Subclass
-     * this and implement the {@link Graphic#draw(Canvas)} method to define the
-     * graphics element.  Add instances to the overlay using {@link GraphicOverlay#add(Graphic)}.
-     */
     public static abstract class Graphic {
         private GraphicOverlay mOverlay;
 
@@ -73,13 +55,6 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
          * @param canvas drawing canvas
          */
         public abstract void draw(Canvas canvas);
-
-        /**
-         * Adjusts a vertical value of the supplied value from the preview scale to the view scale.
-         */
-        public float scaleY(float vertical) {
-            return vertical * mOverlay.mHeightScaleFactor;
-        }
     }
 
     public GraphicOverlay(Context context, AttributeSet attrs) {
@@ -97,63 +72,6 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
     }
 
     /**
-     * Adds a graphic to the overlay.
-     */
-    public void add(T graphic) {
-        synchronized (mLock) {
-            mGraphics.add(graphic);
-        }
-        postInvalidate();
-    }
-
-    /**
-     * Removes a graphic from the overlay.
-     */
-    public void remove(T graphic) {
-        synchronized (mLock) {
-            mGraphics.remove(graphic);
-        }
-        postInvalidate();
-    }
-
-    /**
-     * Returns a copy (as a list) of the set of all active graphics.
-     * @return list of all active graphics.
-     */
-    public List<T> getGraphics() {
-        synchronized (mLock) {
-            return new Vector(mGraphics);
-        }
-    }
-
-    /**
-     * Returns the horizontal scale factor.
-     */
-    public float getWidthScaleFactor() {
-        return mWidthScaleFactor;
-    }
-
-    /**
-     * Returns the vertical scale factor.
-     */
-    public float getHeightScaleFactor() {
-        return mHeightScaleFactor;
-    }
-
-    /**
-     * Sets the camera attributes for size and facing direction, which informs how to transform
-     * image coordinates later.
-     */
-    public void setCameraInfo(int previewWidth, int previewHeight, int facing) {
-        synchronized (mLock) {
-            mPreviewWidth = previewWidth;
-            mPreviewHeight = previewHeight;
-            mFacing = facing;
-        }
-        postInvalidate();
-    }
-
-    /**
      * Draws the overlay with its associated graphic objects.
      */
     @Override
@@ -161,11 +79,6 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
         super.onDraw(canvas);
 
         synchronized (mLock) {
-            if ((mPreviewWidth != 0) && (mPreviewHeight != 0)) {
-                mWidthScaleFactor = (float) canvas.getWidth() / (float) mPreviewWidth;
-                mHeightScaleFactor = (float) canvas.getHeight() / (float) mPreviewHeight;
-            }
-
             for (Graphic graphic : mGraphics) {
                 graphic.draw(canvas);
             }

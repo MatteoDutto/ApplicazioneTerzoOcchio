@@ -95,9 +95,7 @@ public class CameraSourcePreview extends ViewGroup {
                 if (isPortraitMode()) {
                     // Swap width and height sizes when in portrait, since it will be rotated by
                     // 90 degrees
-                    mOverlay.setCameraInfo(min, max, mCameraSource.getCameraFacing());
                 } else {
-                    mOverlay.setCameraInfo(max, min, mCameraSource.getCameraFacing());
                 }
                 mOverlay.clear();
             }
@@ -151,26 +149,8 @@ public class CameraSourcePreview extends ViewGroup {
         final int layoutWidth = right - left;
         final int layoutHeight = bottom - top;
 
-        // Computes height and width for potentially doing fit width.
-        int childWidth = layoutWidth;
-        int childHeight = (int)(((float) layoutWidth / (float) width) * height);
-
-        // If height is too tall using fit width, does fit height instead.
-        if (childHeight > layoutHeight) {
-            childHeight = layoutHeight;
-            childWidth = (int)(((float) layoutHeight / (float) height) * width);
-        }
-
         for (int i = 0; i < getChildCount(); ++i) {
-            getChildAt(i).layout(0, 0, childWidth, childHeight);
-        }
-
-        try {
-            startIfReady();
-        } catch (SecurityException se) {
-            Log.e(TAG,"Do not have permission to start the camera", se);
-        } catch (IOException e) {
-            Log.e(TAG, "Could not start camera source.", e);
+            getChildAt(i).layout(0, 0, layoutWidth, layoutHeight);
         }
     }
 
